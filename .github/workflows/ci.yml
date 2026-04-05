@@ -26,6 +26,10 @@ jobs:
       - name: Install cargo-zigbuild
         run: cargo install cargo-zigbuild
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
       - name: Build wasm
         run: zig build wasi
 
