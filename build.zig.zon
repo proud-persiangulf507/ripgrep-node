@@ -1,7 +1,7 @@
 .{
     .name = .zigrep,
     .version = "0.0.0",
-    .fingerprint = 0x36520762cb15fab1,
-    .minimum_zig_version = "0.15.0",
+    .fingerprint = 0x36520762f52ee133,
+    .minimum_zig_version = "0.15.2",
     .paths = .{ "build.zig", "build.zig.zon" },
 }

@@ -91,7 +91,7 @@ The install loop uses `.{ .custom = "../dist" }` as the install directory — th
 ## Dependencies
 
 - `zig` (tested with 0.15.2)
-- `rustc` + `cargo` (tested with 1.90.0)
+- `rustc` + `cargo` (tested with 1.94.1)
 - `cargo-zigbuild` (`cargo install cargo-zigbuild`)
 - Rust std for `wasm32-wasip1` (plus the native targets if building those)
 - Node.js 18+ / Bun / Deno at runtime (for `WebAssembly.compileStreaming`, web streams, and `node:fs` sync APIs)
