@@ -1,0 +1,114 @@
+/**
+ * Known ripgrep CLI flags (long + short forms). Used to power
+ * autocomplete for {@link ripgrep} arguments — any string is still
+ * accepted (values, patterns, paths, unknown flags).
+ */
+// prettier-ignore
+export type RgFlag =
+  | "--after-context" | "--auto-hybrid-regex" | "--before-context" | "--binary"
+  | "--block-buffered" | "--byte-offset" | "--case-sensitive" | "--color"
+  | "--colors" | "--column" | "--context" | "--context-separator" | "--count"
+  | "--count-matches" | "--crlf" | "--debug" | "--dfa-size-limit" | "--encoding"
+  | "--engine" | "--field-context-separator" | "--field-match-separator"
+  | "--file" | "--files" | "--files-without-match" | "--fixed-strings"
+  | "--follow" | "--glob" | "--glob-case-insensitive" | "--heading" | "--help"
+  | "--hidden" | "--hostname-bin" | "--hyperlink-format" | "--iglob" | "--ignore"
+  | "--ignore-case" | "--ignore-dot" | "--ignore-exclude" | "--ignore-file"
+  | "--ignore-file-case-insensitive" | "--ignore-files" | "--ignore-global"
+  | "--ignore-parent" | "--ignore-vcs" | "--include-zero" | "--invert-match"
+  | "--json" | "--line-buffered" | "--line-number" | "--line-regexp"
+  | "--max-columns" | "--max-columns-preview" | "--max-count" | "--max-depth"
+  | "--max-filesize" | "--maxdepth" | "--mmap" | "--multiline" | "--multiline-dotall"
+  | "--no-auto-hybrid-regex" | "--no-binary" | "--no-block-buffered" | "--no-byte-offset"
+  | "--no-column" | "--no-context-separator" | "--no-crlf" | "--no-encoding"
+  | "--no-filename" | "--no-fixed-strings" | "--no-follow" | "--no-glob-case-insensitive"
+  | "--no-heading" | "--no-hidden" | "--no-ignore" | "--no-ignore-dot"
+  | "--no-ignore-exclude" | "--no-ignore-file-case-insensitive" | "--no-ignore-files"
+  | "--no-ignore-global" | "--no-ignore-parent" | "--no-ignore-vcs" | "--no-include-zero"
+  | "--no-invert-match" | "--no-line-buffered" | "--no-line-number"
+  | "--no-max-columns-preview" | "--no-messages" | "--no-mmap" | "--no-multiline"
+  | "--no-multiline-dotall" | "--no-one-file-system" | "--no-pcre2" | "--no-pcre2-unicode"
+  | "--no-pre" | "--no-require-git" | "--no-search-zip" | "--no-sort-files" | "--no-text"
+  | "--no-trim" | "--no-unicode" | "--null" | "--null-data" | "--one-file-system"
+  | "--only-matching" | "--passthrough" | "--passthru" | "--path-separator" | "--pcre2"
+  | "--pcre2-unicode" | "--pre" | "--pre-glob" | "--pretty" | "--print0" | "--quiet"
+  | "--regex-size-limit" | "--regexp" | "--replace" | "--require-git" | "--search-zip"
+  | "--smart-case" | "--sort" | "--sort-files" | "--sortr" | "--stop-on-nonmatch"
+  | "--text" | "--threads" | "--trim" | "--type" | "--type-add" | "--type-clear"
+  | "--type-list" | "--type-not" | "--unicode" | "--unrestricted" | "--version"
+  | "--vimgrep" | "--with-filename" | "--word-regexp"
+  | "-A" | "-B" | "-C" | "-E" | "-F" | "-H" | "-I" | "-L" | "-M" | "-N" | "-P"
+  | "-R" | "-S" | "-T" | "-U"
+  | "-a" | "-b" | "-c" | "-d" | "-e" | "-f" | "-g" | "-h" | "-i" | "-j" | "-l"
+  | "-m" | "-n" | "-o" | "-p" | "-q" | "-r" | "-s" | "-t" | "-u" | "-v" | "-w"
+  | "-x" | "-z";
+
+/**
+ * An argument to {@link ripgrep}: a known ripgrep flag (autocompleted)
+ * or any other string (value, pattern, path, `--flag=value`, etc).
+ */
+export type RgArg = RgFlag | (string & {});
+
+/**
+ * Options for {@link ripgrep}.
+ */
+export interface ripgrepOptions {
+  /**
+   * Environment variables passed to the WASI instance.
+   * @default process.env
+   */
+  env?: Record<string, string | undefined>;
+
+  /**
+   * WASI preopened directories, mapping guest paths to host paths.
+   * Required for ripgrep to see any files on disk.
+   * @default { ".": process.cwd() }
+   */
+  preopens?: Record<string, string>;
+
+  /**
+   * When `true`, WASI `proc_exit` returns the exit code from `start()`
+   * instead of terminating the Node process.
+   * @default true
+   */
+  returnOnExit?: boolean;
+
+  /**
+   * Use Node's built-in `node:wasi` module instead of the bundled
+   * custom WASI shim. Also enabled via `ZIGREP_NODE_WASI=1`.
+   * @default false
+   */
+  nodeWasi?: boolean;
+}
+
+/**
+ * Result of a ripgrep invocation.
+ */
+export interface RipgrepResult {
+  /** Exit code: 0 = matches found, 1 = no matches, 2 = error. */
+  code: number;
+}
+
+/**
+ * Run ripgrep (compiled to `wasm32-wasip1`) with the given CLI arguments.
+ *
+ * Returns the ripgrep exit code (0 = matches found, 1 = no matches,
+ * 2 = error), matching the native `rg` binary.
+ *
+ * @example
+ * ```js
+ * import { ripgrep } from "zigrep";
+ * const { code } = await ripgrep(["--json", "TODO", "src"]);
+ * ```
+ */
+export function ripgrep(
+  args?: readonly RgArg[],
+  options?: ripgrepOptions,
+): Promise<RipgrepResult>;
+
+/**
+ * Absolute filesystem path to a JS shim that runs ripgrep via `ripgrep`.
+ * Useful for tools that expect an `rgPath`-style binary path (e.g.
+ * `vscode-ripgrep`-compatible consumers).
+ */
+export const rgPath: string;

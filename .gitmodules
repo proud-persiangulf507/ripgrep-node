@@ -1,0 +1,3 @@
+[submodule "vendor/ripgrep"]
+	path = vendor/ripgrep
+	url = https://github.com/BurntSushi/ripgrep.git

@@ -1,0 +1,26 @@
+{
+  "name": "ripgrep",
+  "version": "0.0.1",
+  "repository": "pithings/ripgrep",
+  "license": "MIT",
+  "sideEffects": false,
+  "type": "module",
+  "scripts": {
+    "build": "zig build wasi && node build.ts",
+    "rg": "./lib/rg.mjs"
+  },
+  "exports": {
+    ".": "./lib/index.mjs"
+  },
+  "types": "./lib/index.d.mts",
+  "bin": {
+    "rg": "./lib/rg.mjs",
+    "ripgrep": "./lib/rg.mjs"
+  },
+  "files": [
+    "lib"
+  ],
+  "devDependencies": {
+    "prettier": "^3.8.1"
+  }
+}
