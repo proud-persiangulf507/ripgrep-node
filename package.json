@@ -1,14 +1,8 @@
 {
   "name": "ripgrep",
   "version": "0.2.1",
-  "repository": "pithings/ripgrep-node",
   "license": "MIT",
-  "sideEffects": false,
-  "type": "module",
-  "exports": {
-    ".": "./lib/index.mjs"
-  },
-  "types": "./lib/index.d.mts",
+  "repository": "pithings/ripgrep-node",
   "bin": {
     "rg": "./lib/rg.mjs",
     "ripgrep": "./lib/rg.mjs"
@@ -16,6 +10,12 @@
   "files": [
     "lib"
   ],
+  "type": "module",
+  "sideEffects": false,
+  "types": "./lib/index.d.mts",
+  "exports": {
+    ".": "./lib/index.mjs"
+  },
   "scripts": {
     "build": "zig build wasi && node build.ts",
     "test": "vitest run",
@@ -28,5 +28,6 @@
     "oxfmt": "^0.43.0",
     "prettier": "^3.8.1",
     "vitest": "^4.1.2"
-  }
+  },
+  "packageManager": "pnpm@10.33.0"
 }
