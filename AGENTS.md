@@ -25,7 +25,7 @@
 
 ### Runtime behavior
 
-- Default preopens map `.` → `process.cwd()` and `/` → `/` so both relative and absolute paths work out of the box; override via `options.preopens`.
+- Default preopens map `.` → `process.cwd()`; absolute paths passed as args are auto-added as preopens so they work without extra configuration.
 - ripgrep's TTY auto-detection doesn't work through WASI preview1 (it always sees a non-TTY), so `ripgrep` auto-injects `--color=ansi` when `process.stdout.isTTY` and the caller hasn't specified a color flag. Detection checks `--color`, `--color=…`, and `--no-color`.
 - `nodeWasi: true` (or `ZIGREP_NODE_WASI=1`) swaps the custom shim for Node's built-in `node:wasi`. Same `{ imports, start }` shape either way. Node's version prints an `ExperimentalWarning` on every run — that's why the custom shim is the default.
 - `start()` returns `0` on clean exit or the exit code from `WASIExit`; `node:wasi`'s `start()` returns `undefined` on success, so the adapter coerces with `?? 0`. The public `ripgrep()` function wraps this into a `{ code }` result object.
