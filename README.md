@@ -61,7 +61,7 @@ Absolute filesystem path to a JS shim that runs ripgrep via `ripgrep`. Drop-in r
 Requirements:
 
 - `zig` (tested with 0.15.2)
-- `rustc` + `cargo` (tested with 1.90.0)
+- `rustc` + `cargo` (tested with 1.94.1)
 - [`cargo-zigbuild`](https://github.com/rust-cross/cargo-zigbuild): `cargo install cargo-zigbuild`
 - `rustup target add wasm32-wasip1`
 
