@@ -62,7 +62,7 @@ export interface ripgrepOptions {
   /**
    * WASI preopened directories, mapping guest paths to host paths.
    * Required for ripgrep to see any files on disk.
-   * @default { ".": process.cwd() }
+   * @default { ".": process.cwd(), "/": "/" }
    */
   preopens?: Record<string, string>;
 
