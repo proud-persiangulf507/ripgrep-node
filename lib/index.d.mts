@@ -54,6 +54,28 @@ export type RgArg = RgFlag | (string & {});
  */
 export interface ripgrepOptions {
   /**
+   * Writable stream to use for stdout instead of `process.stdout`.
+   * When provided, TTY auto-detection for `--color=ansi` is skipped.
+   * With `nodeWasi`, only streams with a numeric `fd` property are supported.
+   */
+  stdout?: { write(chunk: Uint8Array | Buffer): unknown; fd?: number };
+
+  /**
+   * Writable stream to use for stderr instead of `process.stderr`.
+   * With `nodeWasi`, only streams with a numeric `fd` property are supported.
+   */
+  stderr?: { write(chunk: Uint8Array | Buffer): unknown; fd?: number };
+
+  /**
+   * When `true`, buffer stdout and stderr and return them as strings
+   * in the result object (`stdout` and `stderr` fields).
+   * If custom `stdout`/`stderr` streams are also provided, those take
+   * precedence and the corresponding field won't be buffered.
+   * @default false
+   */
+  buffer?: boolean;
+
+  /**
    * Environment variables passed to the WASI instance.
    * @default process.env
    */
@@ -90,6 +112,16 @@ export interface RipgrepResult {
 }
 
 /**
+ * Result of a buffered ripgrep invocation (`buffer: true`).
+ */
+export interface RipgrepBufferedResult extends RipgrepResult {
+  /** Captured stdout output (unless a custom `stdout` stream was provided). */
+  stdout: string;
+  /** Captured stderr output (unless a custom `stderr` stream was provided). */
+  stderr: string;
+}
+
+/**
  * Run ripgrep (compiled to `wasm32-wasip1`) with the given CLI arguments.
  *
  * Returns the ripgrep exit code (0 = matches found, 1 = no matches,
@@ -100,7 +132,17 @@ export interface RipgrepResult {
  * import { ripgrep } from "ripgrep";
  * const { code } = await ripgrep(["--json", "TODO", "src"]);
  * ```
+ *
+ * @example
+ * ```js
+ * import { ripgrep } from "ripgrep";
+ * const { code, stdout } = await ripgrep(["TODO", "src"], { buffer: true });
+ * ```
  */
+export function ripgrep(
+  args?: readonly RgArg[],
+  options?: ripgrepOptions & { buffer: true },
+): Promise<RipgrepBufferedResult>;
 export function ripgrep(args?: readonly RgArg[], options?: ripgrepOptions): Promise<RipgrepResult>;
 
 /**

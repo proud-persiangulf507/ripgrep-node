@@ -21,6 +21,9 @@ import { ripgrep, rgPath } from "ripgrep";
 const { code } = await ripgrep(["--json", "TODO", "src"]);
 // 0 = matches found, 1 = no matches, 2 = error
 
+// Buffer output as strings
+const { code, stdout, stderr } = await ripgrep(["TODO", "src"], { buffer: true });
+
 // Or spawn as a child process (drop-in for vscode-ripgrep)
 import { spawn } from "node:child_process";
 spawn(rgPath, ["TODO", "src"], { stdio: "inherit" });
@@ -28,10 +31,13 @@ spawn(rgPath, ["TODO", "src"], { stdio: "inherit" });
 
 ### `ripgrep(args, options)`
 
-Runs ripgrep with the given CLI arguments and returns a `{ code }` result object. Output is written to the host's `process.stdout` / `process.stderr`.
+Runs ripgrep with the given CLI arguments and returns a `{ code }` result object. By default, output is written to the host's `process.stdout` / `process.stderr`.
 
 Options:
 
+- `stdout` — writable stream to use instead of `process.stdout`. When provided, TTY auto-detection for `--color=ansi` is skipped. With `nodeWasi`, only streams with a numeric `fd` property are supported.
+- `stderr` — writable stream to use instead of `process.stderr`. With `nodeWasi`, only streams with a numeric `fd` property are supported.
+- `buffer` — when `true`, capture stdout and stderr and return them as strings in the result (`{ code, stdout, stderr }`). Custom `stdout`/`stderr` streams take precedence over buffering for the corresponding channel (default: `false`).
 - `env` — environment variables passed to the WASI instance (default: `process.env`).
 - `preopens` — WASI preopened directories mapping guest paths to host paths (default: `{ ".": process.cwd() }`). Absolute paths passed as args are auto-added as preopens.
 - `returnOnExit` — when `true`, `proc_exit` returns the exit code instead of terminating the process (default: `true`).

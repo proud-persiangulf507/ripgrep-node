@@ -19,7 +19,7 @@
   "scripts": {
     "build": "zig build wasi && node build.ts",
     "test": "vitest run",
-    "fmt": "oxfmt lib",
+    "fmt": "oxfmt lib test",
     "rg": "./lib/rg.mjs"
   },
   "devDependencies": {
