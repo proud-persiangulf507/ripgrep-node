@@ -1,5 +1,5 @@
 .{
-    .name = .zigrep,
+    .name = .ripgrep,
     .version = "0.0.0",
     .fingerprint = 0x36520762f52ee133,
     .minimum_zig_version = "0.15.2",

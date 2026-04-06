@@ -75,7 +75,7 @@ export interface ripgrepOptions {
 
   /**
    * Use Node's built-in `node:wasi` module instead of the bundled
-   * custom WASI shim. Also enabled via `ZIGREP_NODE_WASI=1`.
+   * custom WASI shim. Also enabled via `RIPGREP_NODE_WASI=1`.
    * @default false
    */
   nodeWasi?: boolean;
@@ -97,14 +97,11 @@ export interface RipgrepResult {
  *
  * @example
  * ```js
- * import { ripgrep } from "zigrep";
+ * import { ripgrep } from "ripgrep";
  * const { code } = await ripgrep(["--json", "TODO", "src"]);
  * ```
  */
-export function ripgrep(
-  args?: readonly RgArg[],
-  options?: ripgrepOptions,
-): Promise<RipgrepResult>;
+export function ripgrep(args?: readonly RgArg[], options?: ripgrepOptions): Promise<RipgrepResult>;
 
 /**
  * Absolute filesystem path to a JS shim that runs ripgrep via `ripgrep`.

@@ -5,10 +5,6 @@
   "license": "MIT",
   "sideEffects": false,
   "type": "module",
-  "scripts": {
-    "build": "zig build wasi && node build.ts",
-    "rg": "./lib/rg.mjs"
-  },
   "exports": {
     ".": "./lib/index.mjs"
   },
@@ -20,8 +16,14 @@
   "files": [
     "lib"
   ],
+  "scripts": {
+    "build": "zig build wasi && node build.ts",
+    "fmt": "oxfmt lib",
+    "rg": "./lib/rg.mjs"
+  },
   "devDependencies": {
     "mitata": "^1.0.34",
+    "oxfmt": "^0.43.0",
     "prettier": "^3.8.1"
   }
 }

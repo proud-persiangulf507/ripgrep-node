@@ -1,4 +1,4 @@
-# zigrep
+# ripgrep
 
 [ripgrep](https://github.com/BurntSushi/ripgrep) packaged as a single cross-platform WASI binary, published to npm as [`ripgrep`](./package.json). The primary artifact is one `.wasm` file, inlined into a JS module — no native binaries ship in the npm package.
 
@@ -27,7 +27,7 @@
 
 - Default preopens map `.` → `process.cwd()`; absolute paths passed as args are auto-added as preopens so they work without extra configuration.
 - ripgrep's TTY auto-detection doesn't work through WASI preview1 (it always sees a non-TTY), so `ripgrep` auto-injects `--color=ansi` when `process.stdout.isTTY` and the caller hasn't specified a color flag. Detection checks `--color`, `--color=…`, and `--no-color`.
-- `nodeWasi: true` (or `ZIGREP_NODE_WASI=1`) swaps the custom shim for Node's built-in `node:wasi`. Same `{ imports, start }` shape either way. Node's version prints an `ExperimentalWarning` on every run — that's why the custom shim is the default.
+- `nodeWasi: true` (or `RIPGREP_NODE_WASI=1`) swaps the custom shim for Node's built-in `node:wasi`. Same `{ imports, start }` shape either way. Node's version prints an `ExperimentalWarning` on every run — that's why the custom shim is the default.
 - `start()` returns `0` on clean exit or the exit code from `WASIExit`; `node:wasi`'s `start()` returns `undefined` on success, so the adapter coerces with `?? 0`. The public `ripgrep()` function wraps this into a `{ code }` result object.
 
 ## Build flavors

@@ -1,6 +1,6 @@
 const std = @import("std");
 
-// zigrep: builds ripgrep (Rust) via `cargo zigbuild`, using Zig as the C
+// builds ripgrep (Rust) via `cargo zigbuild`, using Zig as the C
 // compiler/linker. The Rust sources live in vendor/ripgrep as a git submodule.
 //
 // Two build steps are exposed:

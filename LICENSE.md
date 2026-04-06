@@ -1,7 +1,5 @@
 # License
 
-## zigrep
-
 The MIT License (MIT)
 
 Copyright (c) 2026 Pooya Parsa <pooya@pi0.io>
@@ -32,7 +30,7 @@ This project builds and redistributes binaries of [ripgrep](https://github.com/B
 Copyright (c) 2015 Andrew Gallant.
 
 ripgrep is dual-licensed under **The MIT License** and **The Unlicense**; you
-may use it under the terms of either. For zigrep's redistribution, we rely on
+may use it under the terms of either. For ripgrep's redistribution, we rely on
 the MIT license terms. The upstream license texts are preserved in this
 repository at:
 
