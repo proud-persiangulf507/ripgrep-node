@@ -1,0 +1,2 @@
+hello ripgrep world
+this is a test fixture
