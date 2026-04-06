@@ -99,10 +99,7 @@ describe("ripgrep", () => {
   });
 
   it("follows symlinks in fixture", async () => {
-    const res = await ripgrep(
-      ["--follow", "hello", "test/fixture/link.txt"],
-      { buffer: true },
-    );
+    const res = await ripgrep(["--follow", "hello", "test/fixture/link.txt"], { buffer: true });
     expect(res.code).toBe(0);
     expect(res.stdout).toContain("hello ripgrep world");
   });
